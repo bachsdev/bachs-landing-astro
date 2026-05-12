@@ -6,7 +6,8 @@
   "main": "./worker.js",
   "assets": {
     "binding": "ASSETS",
-    "directory": "dist"
+    "directory": "dist",
+    "serve_directly": false
   },
   "observability": {
     "enabled": true
