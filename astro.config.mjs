@@ -3,9 +3,12 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import dualmark from '@dualmark/astro';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   output: 'static',
   site: 'https://bachs.io',
+
   integrations: [
     react(),
     dualmark({
@@ -121,10 +124,14 @@ This policy describes prohibited activities and usage guidelines for the Bachs p
       ],
     }),
   ],
+
   redirects: {
     '/beta': '/early-access',
   },
+
   image: {
     service: { entrypoint: 'astro/assets/services/sharp' },
   },
+
+  adapter: cloudflare()
 });
