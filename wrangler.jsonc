@@ -3,7 +3,7 @@
   "name": "bachs-landing",
   "compatibility_date": "2026-05-12",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "dist/_worker.js/index.js",
+  "main": "./worker.js",
   "assets": {
     "binding": "ASSETS",
     "directory": "dist"

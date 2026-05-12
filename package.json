@@ -15,6 +15,7 @@
     "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/react": "^4.4.2",
     "@dualmark/astro": "^0.5.2",
+    "@dualmark/cloudflare": "^0.5.2",
     "@formspree/react": "^3.0.0",
     "astro": "^5.18.1",
     "framer-motion": "^12.38.0",
