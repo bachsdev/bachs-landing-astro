@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/static/Hero.astro';
+import SocialProof from '../components/static/SocialProof.astro';
+import ProblemSection from '../components/static/ProblemSection.astro';
+import HowItWorks from '../components/static/HowItWorks.astro';
+import CheckoutPreview from '../components/static/CheckoutPreview.astro';
+import SubscriptionsSection from '../components/static/SubscriptionsSection.astro';
+import PlanEntitlements from '../components/static/PlanEntitlements.astro';
+import FeaturesSection from '../components/static/FeaturesSection.astro';
+import WaitlistSection from '../components/static/WaitlistSection.astro';
+
+import { Navigation } from '../components/islands/Navigation.jsx';
+import { TabSection } from '../components/islands/TabSection.jsx';
+import { SDKTabs } from '../components/islands/SDKTabs.jsx';
+import { FAQSection } from '../components/islands/FAQSection.jsx';
+
+import { FAQS } from '../data/content.js';
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+});
+---
+
+<BaseLayout>
+  <Fragment slot="json-ld">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </Fragment>
+
+  <div class="announcement-banner">
+    <span>Now in Private Beta</span>
+    <a href="/early-access" target="_blank" rel="noopener noreferrer">Join now &rarr;</a>
+  </div>
+
+  <div class="page-lines" aria-hidden="true"></div>
+
+  <Navigation client:load />
+
+  <div class="hero-box">
+    <Hero />
+  </div>
+
+  <SocialProof />
+  <TabSection client:visible />
+  <ProblemSection />
+  <HowItWorks />
+  <CheckoutPreview />
+  <SubscriptionsSection />
+  <PlanEntitlements />
+  <FeaturesSection />
+  <SDKTabs client:visible />
+  <FAQSection client:visible />
+  <WaitlistSection />
+</BaseLayout>

@@ -1,0 +1,54 @@
+# Bachs
+
+> Bachs is a payments and billing platform for internet businesses selling SaaS, subscriptions, and digital products globally.
+
+## What Bachs Does
+
+- **Global Checkout**: Accept cards (150+ currencies), mobile money (GH, KE, UG, RW, NG, ZM, TZ), bank transfer, and stablecoins (USDT, USDC) in a single hosted checkout session
+- **Subscription Billing**: Full lifecycle — free trials, upgrades, downgrades, pauses, cancellations, automatic proration
+- **Usage-Based Billing**: Meter by API calls, tokens, seats, or custom units; aggregate, rate, and invoice automatically
+- **African Settlement**: Settle to NGN (Nigeria), GHS (Ghana), KES (Kenya), ZAR (South Africa), and other local rails quickly
+- **Tax & Compliance**: Automated VAT/GST calculation, Merchant of Record (MOR) workflows for eligible markets
+- **Plan Entitlements**: Feature flags tied to subscription tiers — Bachs grants and revokes entitlements automatically as customers subscribe, upgrade, or churn
+- **Smart Dunning**: Automatic failed-payment recovery with intelligent retry logic
+- **Developer APIs**: REST API, Node.js SDK, Python SDK, Go SDK
+- **Invoicing**: Automatic VAT-compliant invoice generation on every transaction
+
+## What Bachs Does NOT Do
+
+- Not a consumer payments app (no peer-to-peer transfers)
+- Not a bank or financial institution
+- Not a POS or point-of-sale terminal product
+- Not a marketplace escrow product
+- Not a card issuance product
+- Not Stripe — Stripe does not prioritize African settlement or African-native payment methods
+- Not Paystack — Paystack does not offer a full SaaS subscription lifecycle (trials, proration, entitlements, dunning)
+- Not Flutterwave — Flutterwave does not offer SaaS-specific billing features like proration, plan entitlements, or dunning
+
+## Who Bachs Is For
+
+- Founders building SaaS products with recurring subscription revenue who need African bank settlement
+- Founders building API-first or AI products who need usage-based billing
+- Developers who need one integration for global checkout and African payouts
+
+## Who Bachs Is NOT For
+
+- Businesses seeking only local payment collection with no global ambition
+- Physical retail merchants (no POS terminal product)
+- Non-software businesses (Bachs is designed for digital products)
+
+## Availability
+
+Bachs is currently in private beta. Early access is available to founders building internet businesses. Applications reviewed weekly at https://bachs.io/early-access
+
+## Documentation
+
+- Full docs: https://docs.bachs.io
+- API Reference: https://docs.bachs.io/api-reference
+- Merchant of Record overview: https://docs.bachs.io/mor/overview
+
+## Contact
+
+- Support: support@bachs.io
+- Book a demo: https://cal.com/bolu-dada/bachs
+- X: https://x.com/bachshq

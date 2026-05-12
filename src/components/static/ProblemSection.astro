@@ -1,0 +1,23 @@
+---
+import { PROBLEM } from '../../data/content.js';
+
+const [line1, line2] = PROBLEM.title.split('\n');
+const desc2prefix = PROBLEM.description2.replace('Bachs replaces all of it.', '');
+---
+
+<section class="section-problem">
+  <div class="inner reveal">
+    <p class="subheading" style="margin-bottom: 1.25rem;">
+      {PROBLEM.eyebrow}
+    </p>
+    <h2 class="display-2">
+      <span>{line1}</span><br /><span>{line2}</span>
+    </h2>
+    <p class="body-lg" style="margin-top: 1.5rem; max-width: 44rem; margin-left: auto; margin-right: auto;">
+      {PROBLEM.description1}
+    </p>
+    <p class="body-lg" style="margin-top: 1rem; max-width: 44rem; margin-left: auto; margin-right: auto;">
+      {desc2prefix}<strong style="color: var(--text-default); font-weight: 500;">Bachs replaces all of it.</strong>
+    </p>
+  </div>
+</section>

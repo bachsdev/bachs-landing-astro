@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LegalPage } from '../components/islands/LegalPage.jsx';
+---
+
+<BaseLayout
+  title="Merchant Terms — Bachs"
+  description="Bachs merchant terms of service — your rights and responsibilities as a merchant on the Bachs platform."
+  canonical="https://bachs.io/merchant-terms"
+>
+  <LegalPage initialDoc="merchant-terms" client:load />
+</BaseLayout>

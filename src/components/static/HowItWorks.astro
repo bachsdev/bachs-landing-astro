@@ -1,0 +1,50 @@
+---
+import { HOW_IT_WORKS } from '../../data/content.js';
+
+const ICONS: Record<string, string> = {
+  clock: `<svg viewBox="0 0 16 16" fill="none" class="hiw-col-badge">
+    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.35" />
+    <path d="M8 4.8v3.4l2.2 1.2" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>`,
+  shield: `<svg viewBox="0 0 16 16" fill="none" class="hiw-col-badge">
+    <path d="M5.2 3.5h5.6M8 3.5v9M4 9h8" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
+    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.35" />
+  </svg>`,
+  stack: `<svg viewBox="0 0 16 16" fill="none" class="hiw-col-badge">
+    <rect x="3" y="3" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.35" />
+    <path d="M5.5 10.5h5M5.5 8h5M5.5 5.5h3" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
+  </svg>`,
+  globe: `<svg viewBox="0 0 16 16" fill="none" class="hiw-col-badge">
+    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.35" />
+    <path d="M2 8h12M8 2a6 6 0 0 1 0 12" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
+  </svg>`,
+};
+---
+
+<section class="section-hiw" id="how-it-works">
+  <div class="hiw-editorial reveal">
+    <div class="hiw-top">
+      <div class="hiw-intro">
+        <p class="subheading" style="margin-bottom: 1.1rem;">
+          Why Bachs works
+        </p>
+        <h2 class="display-3" style="max-width: 36rem;">
+          Built for the builder who can't wait for the West to catch up.
+        </h2>
+      </div>
+    </div>
+    <div class="hiw-columns">
+      {HOW_IT_WORKS.map((item) => (
+        <article class="hiw-col">
+          <div class="hiw-col-header">
+            <Fragment set:html={ICONS[item.icon]} />
+            <h3 class="hiw-col-title" style="margin-bottom: 0;">
+              {item.title}
+            </h3>
+          </div>
+          <p class="body-sm">{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

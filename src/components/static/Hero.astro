@@ -1,0 +1,30 @@
+---
+import { HeroReceipt } from '../islands/HeroReceipt.jsx';
+---
+
+<section class="hero">
+  <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;" id="hero-grid">
+    <div>
+      <h1 class="display-1 fade-in fade-in-delay-1" style="max-width: 18ch;">
+        Payments built for <span style="font-family: 'Geist Pixel', monospace; white-space: nowrap;">internet businesses.</span>
+      </h1>
+      <p class="body-lg fade-in fade-in-delay-2" style="margin-top: 1.5rem; max-width: 36rem;">
+        Accept payments, automate billing, and monetize your software globally.<br />We handle the money, so you can focus on building.
+      </p>
+      <div class="hero-cta-row fade-in fade-in-delay-3">
+        <a href="/early-access" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+          Get Started
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="margin-left: 0.25rem;">
+            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="https://docs.bachs.io" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+          View docs
+        </a>
+      </div>
+    </div>
+    <div style="height: 520px; margin-top: -3rem;">
+      <HeroReceipt client:load />
+    </div>
+  </div>
+</section>

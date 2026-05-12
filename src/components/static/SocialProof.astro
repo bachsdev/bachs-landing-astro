@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import pipnex from '../../assets/social-proof/pipnex-removebg-preview.png';
+import psychedlie from '../../assets/social-proof/psychedelie-removebg-preview.png';
+import rafiki from '../../assets/social-proof/rafiki-removebg-preview.png';
+import syncgram from '../../assets/social-proof/Syncgram (Full).png';
+import syncgramIcon from '../../assets/social-proof/Syncgram Trades (Icon).png';
+---
+
+<section class="social-proof">
+  <p class="social-proof-label">&#9632; Powering the next wave of internet businesses</p>
+  <div class="social-proof-logos">
+    <Image src={pipnex} alt="Pipnex" class="social-proof-logo social-proof-logo-xl" />
+    <Image src={psychedlie} alt="Psychedelie" class="social-proof-logo" />
+    <Image src={rafiki} alt="Rafiki" class="social-proof-logo social-proof-logo-lg" />
+    <Image src={syncgram} alt="Syncgram" class="social-proof-logo" />
+    <Image src={syncgramIcon} alt="Syncgram Trades" class="social-proof-logo social-proof-logo-sm" />
+  </div>
+</section>

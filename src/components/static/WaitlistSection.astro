@@ -1,0 +1,122 @@
+---
+import logoWhite from '../../assets/icons/logo-white.png';
+
+const FOOTER_LINKS = {
+  Features: ['Global Checkout', 'Subscriptions', 'Usage Billing', 'Settlement', 'Stablecoin'],
+  Resources: ['Documentation', 'API Reference', 'Pricing', 'Changelog'],
+  Company: ['About', 'Blog', 'X', 'Legal', 'Privacy Policy'],
+  Support: ['Contact', 'Status'],
+};
+
+const FOOTER_LINK_MAP: Record<string, { href: string; target?: string; rel?: string }> = {
+  Contact:         { href: 'mailto:support@bachs.io' },
+  Status:          { href: 'mailto:support@bachs.io' },
+  X:               { href: 'https://x.com/bachshq', target: '_blank', rel: 'noopener noreferrer' },
+  Legal:           { href: '/privacy' },
+  'Privacy Policy':{ href: '/privacy' },
+  Pricing:         { href: '/pricing' },
+  Documentation:   { href: 'https://docs.bachs.io', target: '_blank', rel: 'noopener noreferrer' },
+  'API Reference': { href: 'https://docs.bachs.io/api-reference', target: '_blank', rel: 'noopener noreferrer' },
+};
+---
+
+<section class="section-waitlist" id="waitlist">
+  <div class="container">
+    <div class="waitlist-card reveal">
+      <p class="subheading" style="color: rgba(255,255,255,0.35); margin-bottom: 1.5rem;">
+        Private Beta
+      </p>
+      <h2 class="display-2" style="color: var(--text-inverted);">
+        Your global billing infrastructure is ready.
+      </h2>
+      <p class="body-lg" style="color: rgba(255,255,255,0.5); margin-top: 1.25rem; max-width: 34rem; margin-left: auto; margin-right: auto;">
+        We're in private beta with a small group of founders building SaaS
+        and digital products for the world. If that's you, apply now — we
+        review applications weekly.
+      </p>
+      <div style="margin-top: 2.5rem;">
+        <a href="/early-access" target="_blank" rel="noopener noreferrer" class="btn btn-inverted btn-lg">
+          Get Early Access
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="margin-left: 0.25rem;">
+            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.8125rem; color: rgba(255,255,255,0.3); font-family: 'Inter', sans-serif;">
+        No credit card required. Priority review for founders with active products.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer columns -->
+  <div style="max-width: 75rem; margin: 5rem auto 0; padding: 4rem 1.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.07);">
+    <div class="footer-link-columns" style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 3rem;">
+      <!-- Brand -->
+      <div>
+        <a href="/" style="text-decoration: none; display: inline-block; margin-bottom: 1rem;">
+          <img src={logoWhite.src} alt="Bachs" style="height: 1.5rem;" />
+        </a>
+        <div style="font-family: 'Inter', sans-serif; font-size: 0.8125rem; color: rgba(255,255,255,0.25);">
+          &copy; Bachs, Inc. 2025
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      {Object.entries(FOOTER_LINKS).map(([title, links]) => (
+        <div>
+          <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1.25rem;">
+            {title}
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            {links.map((label) => {
+              const extra = FOOTER_LINK_MAP[label] || { href: '#' };
+              return (
+                <a
+                  href={extra.href}
+                  target={extra.target}
+                  rel={extra.rel}
+                  style="font-family: 'Inter', sans-serif; font-size: 0.875rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s;"
+                >
+                  {label}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mobile footer -->
+  <div class="footer-mobile" style="display: none; max-width: 75rem; margin: 3rem auto 0; padding: 2rem 1.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.07); flex-direction: column; gap: 2rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <img src="/icons/logo-white.png" alt="Bachs" style="height: 1.25rem;" />
+      <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.25);">
+        &copy; Bachs, Inc. 2025
+      </span>
+    </div>
+    {Object.entries(FOOTER_LINKS).map(([title, links]) => (
+      <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+        <div style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; text-transform: uppercase;">
+          {title}
+        </div>
+        {links.map((label) => {
+          const extra = FOOTER_LINK_MAP[label] || { href: '#' };
+          return (
+            <a href={extra.href} target={extra.target} rel={extra.rel}
+              style="font-family: 'Inter', sans-serif; font-size: 0.875rem; color: rgba(255,255,255,0.5); text-decoration: none;">
+              {label}
+            </a>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+
+  <style>
+    @media (max-width: 640px) {
+      .footer-link-columns { display: none !important; }
+      .footer-mobile { display: flex !important; }
+    }
+  </style>
+</section>

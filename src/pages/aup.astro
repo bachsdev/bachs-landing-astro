@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LegalPage } from '../components/islands/LegalPage.jsx';
+---
+
+<BaseLayout
+  title="Acceptable Use Policy — Bachs"
+  description="Bachs acceptable use policy — prohibited activities and usage guidelines for the Bachs platform."
+  canonical="https://bachs.io/aup"
+>
+  <LegalPage initialDoc="aup" client:load />
+</BaseLayout>

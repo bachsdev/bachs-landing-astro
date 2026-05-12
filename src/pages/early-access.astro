@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EarlyAccessPage } from '../components/islands/EarlyAccessForm.jsx';
+---
+
+<BaseLayout
+  title="Early Access — Bachs"
+  description="Join the Bachs early access programme. Be first to build global payments infrastructure for African internet businesses."
+  canonical="https://bachs.io/early-access"
+>
+  <EarlyAccessPage client:load />
+</BaseLayout>

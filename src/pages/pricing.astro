@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PricingPage } from '../components/islands/PricingPage.jsx';
+---
+
+<BaseLayout
+  title="Pricing — Bachs"
+  description="Simple, transparent pricing. Start at 1.2% per successful local transaction. No setup fees, no monthly costs."
+  canonical="https://bachs.io/pricing"
+>
+  <PricingPage client:load />
+</BaseLayout>
