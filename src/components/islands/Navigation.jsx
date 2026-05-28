@@ -156,7 +156,7 @@ export function Navigation({ navigate }) {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://cal.com/bolu-dada/bachs"
+                  href="https://app.bachs.io/signup"
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
@@ -182,7 +182,7 @@ export function Navigation({ navigate }) {
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#333333")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
                 >
-                  Book a Demo
+                  Signup
                 </motion.a>
               )}
             </AnimatePresence>
@@ -204,7 +204,7 @@ export function Navigation({ navigate }) {
               Sign in
             </a>
             <a
-              href="https://cal.com/bolu-dada/bachs"
+              href="https://app.bachs.io/signup"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -217,7 +217,7 @@ export function Navigation({ navigate }) {
               onMouseEnter={(e) => (e.currentTarget.style.background = "#333333")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
             >
-              Book a Demo
+              Signup
             </a>
 
           </motion.div>
@@ -299,7 +299,7 @@ export function Navigation({ navigate }) {
                 Sign in
               </a>
               <a
-                href="https://cal.com/bolu-dada/bachs"
+                href="https://app.bachs.io/signup"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -314,7 +314,7 @@ export function Navigation({ navigate }) {
                   textAlign: "center",
                 }}
               >
-                Book a Demo
+                Signup
               </a>
             </div>
           </div>,
