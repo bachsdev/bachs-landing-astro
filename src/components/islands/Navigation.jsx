@@ -156,7 +156,7 @@ export function Navigation({ navigate }) {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://app.bachs.io/signup"
+                  href="https://cal.com/bolu-dada/bachs"
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
@@ -182,7 +182,7 @@ export function Navigation({ navigate }) {
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#333333")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
                 >
-                  Get Started
+                  Book a Demo
                 </motion.a>
               )}
             </AnimatePresence>
@@ -218,6 +218,9 @@ export function Navigation({ navigate }) {
               onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
             >
               Get Started
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style={{ marginLeft: "0.3rem" }}>
+                <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </a>
 
           </motion.div>
@@ -312,9 +315,15 @@ export function Navigation({ navigate }) {
                   padding: "0.875rem 1.25rem",
                   borderRadius: "9999px",
                   textAlign: "center",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 Get Started
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style={{ marginLeft: "0.3rem" }}>
+                  <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </a>
             </div>
           </div>,
