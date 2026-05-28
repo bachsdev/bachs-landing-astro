@@ -182,7 +182,7 @@ export function Navigation({ navigate }) {
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#333333")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
                 >
-                  Signup
+                  Get Started
                 </motion.a>
               )}
             </AnimatePresence>
@@ -217,7 +217,7 @@ export function Navigation({ navigate }) {
               onMouseEnter={(e) => (e.currentTarget.style.background = "#333333")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "#111111")}
             >
-              Signup
+              Get Started
             </a>
 
           </motion.div>
@@ -314,7 +314,7 @@ export function Navigation({ navigate }) {
                   textAlign: "center",
                 }}
               >
-                Signup
+                Get Started
               </a>
             </div>
           </div>,
