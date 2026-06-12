@@ -1,8 +1,4 @@
 import { useState } from "react";
-import _logoLockup2x from "../../assets/icons/header-lockup-2x.png";
-const logoLockup2x = _logoLockup2x.src ?? _logoLockup2x;
-import _logoLockup8x from "../../assets/icons/header-lockup-8x.png";
-const logoLockup8x = _logoLockup8x.src ?? _logoLockup8x;
 
 /* ─── Shared style tokens ─────────────────────────────────────────────────── */
 const body = {
@@ -2204,62 +2200,13 @@ export function LegalPage({ initialDoc = "privacy", navigate }) {
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
       }}
     >
-      {/* Top nav bar */}
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          background: "rgba(255,255,255,0.95)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(0,0,0,0.06)",
-          height: "4rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 2rem",
-        }}
-      >
-        <a
-          href="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            textDecoration: "none",
-          }}
-        >
-          <img
-            src={logoLockup2x}
-            srcSet={`${logoLockup2x} 2x, ${logoLockup8x} 8x`}
-            alt="Bachs"
-            style={{ height: "2rem" }}
-          />
-        </a>
-        <a
-          href="/"
-          style={{
-            fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
-            fontSize: "0.875rem",
-            color: "#555555",
-            textDecoration: "none",
-            transition: "color 0.15s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#111111")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
-        >
-          Go to Bachs →
-        </a>
-      </header>
-
       {/* Body */}
       <div
         className="legal-layout"
         style={{
           maxWidth: "72rem",
           margin: "0 auto",
-          padding: "6rem 2rem 6rem",
+          padding: "3rem 2rem 6rem",
           display: "grid",
           gridTemplateColumns: "14rem 1fr",
           gap: "5rem",

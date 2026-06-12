@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Navigation } from '../components/islands/Navigation.jsx';
 import { LegalPage } from '../components/islands/LegalPage.jsx';
 ---
 
@@ -9,5 +10,6 @@ import { LegalPage } from '../components/islands/LegalPage.jsx';
   description="Bachs privacy policy — how we collect, use, and protect your personal data."
   canonical="https://bachs.io/privacy"
 >
+  <Navigation client:load />
   <LegalPage initialDoc="privacy" client:load />
 </BaseLayout>
