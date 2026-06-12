@@ -1,21 +1,21 @@
-import _logoLockup2x from "../../assets/icons/header-lockup-2x.png";
-const logoLockup2x = _logoLockup2x.src ?? _logoLockup2x;
-import _logoLockup8x from "../../assets/icons/header-lockup-8x.png";
-const logoLockup8x = _logoLockup8x.src ?? _logoLockup8x;
+import { useState } from "react";
 
-function Check() {
+const INK = "#111111";
+const INK_HOVER = "#333333";
+
+function CheckIcon({ color = INK }) {
   return (
     <svg
-      width="14"
-      height="14"
+      width="15"
+      height="15"
       viewBox="0 0 16 16"
       fill="none"
-      style={{ flexShrink: 0, marginTop: "0.15rem" }}
+      style={{ flexShrink: 0, marginTop: "0.2rem" }}
     >
       <path
-        d="M3 8l3 3 7-7"
-        stroke="#111111"
-        strokeWidth="1.75"
+        d="M3 8.5l3.5 3.5L13 4.5"
+        stroke={color}
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -47,7 +47,7 @@ function Card({ children, style = {} }) {
       style={{
         background: "#ffffff",
         border: "1px solid rgba(0,0,0,0.08)",
-        borderRadius: "1rem",
+        borderRadius: "1.25rem",
         padding: "2rem",
         ...style,
       }}
@@ -57,38 +57,185 @@ function Card({ children, style = {} }) {
   );
 }
 
-function Divider() {
+function IconChip({ children }) {
   return (
     <div
       style={{
-        height: "1px",
-        background: "rgba(0,0,0,0.06)",
-        margin: "1.5rem 0",
+        width: "2.75rem",
+        height: "2.75rem",
+        borderRadius: "0.75rem",
+        background: "#f3f3f1",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
       }}
-    />
+    >
+      {children}
+    </div>
   );
 }
 
-function LineItem({ label, desc, value, sub, crossed, indent = false }) {
+function CardIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <rect
+        x="2.5"
+        y="5"
+        width="19"
+        height="14"
+        rx="2.5"
+        stroke={INK}
+        strokeWidth="1.75"
+      />
+      <path d="M2.5 9.5h19" stroke={INK} strokeWidth="1.75" />
+      <path
+        d="M6 14.5h4"
+        stroke={INK}
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <rect
+        x="6.5"
+        y="2.5"
+        width="11"
+        height="19"
+        rx="2.5"
+        stroke={INK}
+        strokeWidth="1.75"
+      />
+      <path
+        d="M10.5 18h3"
+        stroke={INK}
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CoinIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke={INK} strokeWidth="1.75" />
+      <path
+        d="M12 7.5v9M9.5 9.75c0-.97 1.12-1.75 2.5-1.75s2.5.78 2.5 1.75c0 2.6-5 1.9-5 4.5 0 .97 1.12 1.75 2.5 1.75s2.5-.78 2.5-1.75"
+        stroke={INK}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CardHeader({ icon, title, desc, bullets, cta }) {
+  return (
+    <div>
+      <div className="pricing-card-head">
+        <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+          {icon}
+          <div>
+            <h2
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: "1.375rem",
+                fontWeight: 600,
+                color: INK,
+                letterSpacing: "-0.01em",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {title}
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9375rem",
+                color: "#888888",
+                margin: 0,
+              }}
+            >
+              {desc}
+            </p>
+          </div>
+        </div>
+        {cta && (
+          <a
+            href="/early-access"
+            style={{
+              padding: "0.625rem 1.375rem",
+              background: INK,
+              color: "#ffffff",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              borderRadius: "9999px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.background = INK_HOVER)}
+            onMouseOut={(e) => (e.currentTarget.style.background = INK)}
+          >
+            Get started
+          </a>
+        )}
+      </div>
+      {bullets && (
+        <div style={{ marginTop: "1.25rem" }}>
+          {bullets.map((b) => (
+            <div
+              key={b}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "0.625rem",
+                marginBottom: "0.5rem",
+              }}
+            >
+              <CheckIcon />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.9375rem",
+                  color: "#444444",
+                  lineHeight: 1.6,
+                }}
+              >
+                {b}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FeeRow({ label, desc, value, subs = [], last = false }) {
   return (
     <div
+      className="pricing-fee-row"
       style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        gap: "1.5rem",
-        paddingLeft: indent ? "1rem" : 0,
-        padding: "0.875rem 0",
-        borderBottom: "1px solid rgba(0,0,0,0.06)",
+        padding: "1.375rem 0",
+        borderBottom: last ? "none" : "1px solid rgba(0,0,0,0.06)",
       }}
     >
-      <div>
+      <div style={{ maxWidth: "30rem" }}>
         <div
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: "0.9375rem",
-            fontWeight: 500,
-            color: "#111111",
+            fontSize: "1rem",
+            fontWeight: 600,
+            color: INK,
+            marginBottom: desc ? "0.35rem" : 0,
           }}
         >
           {label}
@@ -97,80 +244,43 @@ function LineItem({ label, desc, value, sub, crossed, indent = false }) {
           <div
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8125rem",
+              fontSize: "0.875rem",
               color: "#888888",
-              marginTop: "0.2rem",
-              lineHeight: 1.5,
-              maxWidth: "32rem",
+              lineHeight: 1.6,
             }}
           >
             {desc}
           </div>
         )}
       </div>
-      <div style={{ textAlign: "right", flexShrink: 0 }}>
+      <div className="pricing-fee-value">
         <div
           style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.9375rem",
-            fontWeight: 500,
-            color: "#111111",
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: "1.375rem",
+            fontWeight: 600,
+            color: INK,
+            letterSpacing: "-0.01em",
+            lineHeight: 1.2,
           }}
         >
           {value}
         </div>
-        {crossed && (
+        {subs.map((s) => (
           <div
+            key={s}
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.8125rem",
-              color: "#aaaaaa",
-              textDecoration: "line-through",
-              marginTop: "0.15rem",
+              color: "#999999",
+              marginTop: "0.25rem",
+              lineHeight: 1.5,
             }}
           >
-            {crossed}
+            {s}
           </div>
-        )}
-        {sub && (
-          <div
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 400,
-              fontSize: "0.75rem",
-              color: "#aaaaaa",
-              marginTop: "0.15rem",
-            }}
-          >
-            {sub}
-          </div>
-        )}
+        ))}
       </div>
-    </div>
-  );
-}
-
-function BulletRow({ children }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "0.625rem",
-        marginBottom: "0.625rem",
-      }}
-    >
-      <Check />
-      <span
-        style={{
-          fontFamily: "'Inter', sans-serif",
-          fontSize: "0.9375rem",
-          color: "#444444",
-          lineHeight: 1.6,
-        }}
-      >
-        {children}
-      </span>
     </div>
   );
 }
@@ -182,11 +292,10 @@ function GroupLabel({ children }) {
         fontFamily: "'Inter', sans-serif",
         fontSize: "0.75rem",
         fontWeight: 600,
-        letterSpacing: "0.04em",
+        letterSpacing: "0.05em",
         textTransform: "uppercase",
         color: "#aaaaaa",
-        marginBottom: "0.25rem",
-        marginTop: "1.5rem",
+        margin: "1.75rem 0 0",
       }}
     >
       {children}
@@ -194,70 +303,253 @@ function GroupLabel({ children }) {
   );
 }
 
+function MathCard({ scenario, lines, takeaway }) {
+  return (
+    <Card style={{ padding: "1.75rem", display: "flex", flexDirection: "column" }}>
+      <p
+        style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: "0.875rem",
+          color: "#888888",
+          marginBottom: "1.25rem",
+        }}
+      >
+        {scenario}
+      </p>
+      <div style={{ flex: 1 }}>
+        {lines.map(([k, v], i) => (
+          <div
+            key={k}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "1rem",
+              padding: "0.5rem 0",
+              borderBottom:
+                i === lines.length - 1 ? "none" : "1px solid rgba(0,0,0,0.05)",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.875rem",
+                color: i === lines.length - 1 ? INK : "#888888",
+                fontWeight: i === lines.length - 1 ? 600 : 400,
+              }}
+            >
+              {k}
+            </span>
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: "0.9375rem",
+                fontWeight: 600,
+                color: INK,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {v}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p
+        style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: "0.8125rem",
+          color: "#888888",
+          background: "#f3f3f1",
+          borderRadius: "0.625rem",
+          padding: "0.75rem 1rem",
+          marginTop: "1.25rem",
+          lineHeight: 1.55,
+        }}
+      >
+        {takeaway}
+      </p>
+    </Card>
+  );
+}
+
+const INCLUDED = [
+  {
+    title: "Hosted checkout",
+    desc: "Conversion-optimized and ready out of the box.",
+  },
+  {
+    title: "Fraud protection",
+    desc: "Built into every transaction. No extra % fee.",
+  },
+  {
+    title: "NGN & USD balances",
+    desc: "Money sits in your balance until you choose to withdraw. No forced payouts.",
+  },
+  {
+    title: "Instant settlement",
+    desc: "NGN payments are ready to withdraw immediately. No T+1, no weekend waits.",
+  },
+  {
+    title: "Invoicing & receipts",
+    desc: "Generated automatically with every sale.",
+  },
+  {
+    title: "Analytics & reporting",
+    desc: "Know exactly how your business is performing.",
+  },
+  {
+    title: "APIs, SDKs & webhooks",
+    desc: "If you can imagine it, you can build it.",
+  },
+  {
+    title: "Zero setup fees",
+    desc: "No integration, monthly, or maintenance fees.",
+  },
+];
+
+const COMPARISON = [
+  {
+    label: "Accept NGN, global cards, mobile money & crypto",
+    bachs: "One integration",
+    stack: "3–4 separate providers",
+  },
+  {
+    label: "Global card settlement",
+    bachs: "USD balance — withdraw as USDT or convert to NGN instantly",
+    stack: "ACH transfers, wire fees, multi-day delays",
+  },
+  {
+    label: "NGN settlement",
+    bachs: "Instant, 24/7 — withdraw whenever you choose",
+    stack: "Next working day, forced bank payouts",
+  },
+  {
+    label: "Currency conversion",
+    bachs: "We absorb the FX risk. You get a clean rate",
+    stack: "2–4% hidden spread on every hop",
+  },
+  {
+    label: "Setup & monthly fees",
+    bachs: "₦0 — you only pay when you get paid",
+    stack: "Stacks up across every tool",
+  },
+];
+
+const FAQS = [
+  {
+    q: "When do I get my money?",
+    a: "Immediately. NGN payments settle to your balance the moment they're confirmed — nights, weekends and holidays included. Global card payments land in your USD balance, withdrawable as USDT or convertible to NGN instantly. And your money stays in your balance until you decide what to do with it: withdraw to your bank, convert, or hold. We never force a payout.",
+  },
+  {
+    q: "What does it cost to start?",
+    a: "Nothing. There are no setup fees, no monthly fees, and no maintenance fees. You only pay a fee when you successfully get paid.",
+  },
+  {
+    q: "Are there really no hidden fees?",
+    a: "The rate you see is what you pay. The only add-on is +1% where currency conversion applies on mobile money payments — and it's printed right next to the rate, not buried in fine print.",
+  },
+  {
+    q: "Who pays the fees — me or my customer?",
+    a: "Your choice. By default, fees come out of the payment before it settles to you. But you can also pass fees on to your customer at checkout, so you receive the full amount of every sale.",
+  },
+  {
+    q: "What's the most I'll ever pay on a local transaction?",
+    a: "₦2,000. Local NGN fees are capped — whether your customer pays ₦200,000 or ₦2,000,000, the fee never goes above ₦2,000. The bigger the sale, the lower your effective rate.",
+  },
+  {
+    q: "Do you offer volume discounts?",
+    a: "Yes. High-volume businesses get custom, country-specific rates, dedicated support, and custom settlement flows. Talk to us and we'll build a plan around your volume.",
+  },
+];
+
+function FAQItem({ q, a, open, onToggle }) {
+  return (
+    <div style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+      <button
+        onClick={onToggle}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "1.5rem",
+          padding: "1.25rem 0",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          textAlign: "left",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "1rem",
+            fontWeight: 600,
+            color: INK,
+          }}
+        >
+          {q}
+        </span>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 16 16"
+          fill="none"
+          style={{
+            flexShrink: 0,
+            transform: open ? "rotate(45deg)" : "none",
+            transition: "transform 0.2s ease",
+          }}
+        >
+          <path
+            d="M8 2v12M2 8h12"
+            stroke="#888888"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </button>
+      {open && (
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.9375rem",
+            color: "#666666",
+            lineHeight: 1.7,
+            margin: "0 0 1.25rem",
+            maxWidth: "44rem",
+          }}
+        >
+          {a}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function PricingPage({ navigate }) {
+  const [openFaq, setOpenFaq] = useState(0);
+
   return (
     <main style={{ minHeight: "100vh", background: "#f9f9f8" }}>
       <style>{`
-        .pricing-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .pricing-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .pricing-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .pricing-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; }
+        .pricing-fee-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+        .pricing-fee-value { text-align: right; flex-shrink: 0; }
+        .pricing-math-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+        .pricing-included-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem 2rem; }
+        .pricing-compare-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 860px) {
+          .pricing-math-grid { grid-template-columns: 1fr; }
+          .pricing-included-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 720px) {
-          .pricing-plans { grid-template-columns: 1fr; }
-          .pricing-section-grid { grid-template-columns: 1fr; }
-          .pricing-why-grid { grid-template-columns: 1fr; }
+          .pricing-card-head { flex-direction: column; }
+          .pricing-fee-row { flex-direction: column; gap: 0.625rem; }
+          .pricing-fee-value { text-align: left; }
+          .pricing-compare-row { grid-template-columns: 1fr; gap: 0.5rem; }
+          .pricing-included-grid { grid-template-columns: 1fr; }
         }
       `}</style>
-
-      {/* Nav */}
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          background: "rgba(249,249,248,0.92)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(0,0,0,0.07)",
-          padding: "0 1.5rem",
-          height: "3.75rem",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "60rem",
-            width: "100%",
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <a href="/" style={{ display: "inline-block" }}>
-            <img
-              src={logoLockup8x}
-              srcSet={`${logoLockup2x} 2x, ${logoLockup8x} 8x`}
-              alt="Bachs"
-              style={{ height: "2rem" }}
-            />
-          </a>
-          <a
-            href="/early-access"
-            style={{
-              padding: "0.5rem 1.125rem",
-              background: "#111111",
-              color: "#ffffff",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8125rem",
-              fontWeight: 500,
-              borderRadius: "9999px",
-              textDecoration: "none",
-            }}
-          >
-            Get early access
-          </a>
-        </div>
-      </header>
 
       <div
         style={{
@@ -271,22 +563,20 @@ export function PricingPage({ navigate }) {
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: "0.75rem",
-              fontWeight: 500,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#888888",
-              marginBottom: "1.25rem",
+              fontSize: "0.9375rem",
+              fontWeight: 600,
+              color: INK,
+              marginBottom: "1rem",
             }}
           >
-            Pricing
+            Every fee, explained
           </p>
           <h1
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: "clamp(2rem, 5vw, 3.25rem)",
               fontWeight: 600,
-              color: "#111111",
+              color: INK,
               letterSpacing: "-0.025em",
               lineHeight: 1.1,
               marginBottom: "1.25rem",
@@ -296,673 +586,278 @@ export function PricingPage({ navigate }) {
             <br />
             global builders.
           </h1>
-          <div
-            style={{
-              display: "inline-block",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(1.25rem, 2.5vw, 1.625rem)",
-              fontWeight: 600,
-              color: "#111111",
-              marginBottom: "0.75rem",
-            }}
-          >
-            Start at 1.2%
-          </div>
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "1rem",
               color: "#888888",
               maxWidth: "30rem",
-              margin: "0 auto",
+              margin: "0 auto 2rem",
               lineHeight: 1.65,
             }}
           >
-            No hidden fees. Pay only for what you use, whether you're just
-            starting or scaling globally.
+            We only make money when you do. See exactly what you pay — and
+            exactly what you keep.
           </p>
-        </div>
-
-        {/* ── Plans ── */}
-        <div style={{ marginBottom: "5rem" }}>
-          <SectionLabel>Plans</SectionLabel>
-          <div className="pricing-plans">
-            {/* Standard */}
-            <Card>
-              <div
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.125rem",
-                  fontWeight: 600,
-                  color: "#111111",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Standard
-              </div>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#888888",
-                  marginBottom: "2rem",
-                }}
-              >
-                Pay-as-you-go. No setup fees, no monthly costs.
-              </p>
-              <div
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "clamp(2.5rem, 5vw, 3.25rem)",
-                  fontWeight: 700,
-                  color: "#111111",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                  marginBottom: "0.5rem",
-                }}
-              >
-                1.2%
-              </div>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.9375rem",
-                  fontWeight: 500,
-                  color: "#333333",
-                  marginBottom: "2rem",
-                }}
-              >
-                Per successful local transaction
-              </p>
-              <a
-                href="/early-access"
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "0.625rem",
+            }}
+          >
+            {[
+              "No setup fees",
+              "No monthly fees",
+              "No hidden fees",
+              "Pay only when you get paid",
+            ].map((t) => (
+              <span
+                key={t}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.375rem",
-                  padding: "0.75rem 1.5rem",
-                  background: "#111111",
-                  color: "#ffffff",
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.9375rem",
-                  fontWeight: 500,
+                  gap: "0.4rem",
+                  padding: "0.45rem 0.95rem",
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
                   borderRadius: "9999px",
-                  textDecoration: "none",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.8125rem",
+                  color: "#444444",
                 }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.background = "#333333")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.background = "#111111")
-                }
               >
-                Get started
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
                   <path
-                    d="M6 3l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
+                    d="M3 8.5l3.5 3.5L13 4.5"
+                    stroke={INK}
+                    strokeWidth="2.2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
-            </Card>
-
-            {/* Enterprise */}
-            <Card style={{ background: "#111111", border: "none" }}>
-              <div
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.125rem",
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Enterprise
-              </div>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "rgba(255,255,255,0.45)",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                Custom pricing for high-volume businesses.
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 0,
-                  marginBottom: "2rem",
-                }}
-              >
-                {[
-                  "Volume-based discounts",
-                  "Dedicated support",
-                  "Custom settlement flows",
-                  "Country-Specific Rates",
-                ].map((f) => (
-                  <div
-                    key={f}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.625rem",
-                      marginBottom: "0.625rem",
-                    }}
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      style={{ flexShrink: 0, marginTop: "0.15rem" }}
-                    >
-                      <path
-                        d="M3 8l3 3 7-7"
-                        stroke="rgba(255,255,255,0.6)"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: "0.9375rem",
-                        color: "rgba(255,255,255,0.7)",
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {f}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href="https://cal.com/bolu-dada/bachs"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.375rem",
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.9375rem",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.85)",
-                  textDecoration: "none",
-                }}
-                onMouseOver={(e) => (e.currentTarget.style.opacity = "0.7")}
-                onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
-              >
-                Contact sales
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M3 8h10M9 4l4 4-4 4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-            </Card>
+                {t}
+              </span>
+            ))}
           </div>
         </div>
 
         {/* ── Payments ── */}
-        <div style={{ marginBottom: "4rem" }}>
+        <div style={{ marginBottom: "3rem" }}>
           <SectionLabel>Payments</SectionLabel>
           <Card>
-            <h2
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "1.25rem",
-                fontWeight: 600,
-                color: "#111111",
-                marginBottom: "0.375rem",
-              }}
-            >
-              Accept payments globally without stitching multiple providers.
-            </h2>
-            <Divider />
+            <CardHeader
+              icon={
+                <IconChip>
+                  <CardIcon />
+                </IconChip>
+              }
+              title="Payments"
+              desc="Accept payments globally without stitching multiple providers."
+              bullets={[
+                "One integration, every market and currency.",
+                "Instant NGN settlement — nights, weekends and holidays included.",
+                "Settle to NGN or USD — your choice.",
+                "No ACH fees or settlement delays.",
+                "Pass fees to your customers, or absorb them. Your call.",
+              ]}
+              cta
+            />
 
             <GroupLabel>NGN (Local)</GroupLabel>
-            <LineItem
+            <FeeRow
               label="Bank transfer"
               desc="Direct bank transfers to Nigerian accounts."
-              value="1.2%"
-              crossed="Others charge 1.5% + ₦100"
-              indent
-            />
-            <LineItem
-              label="Local cards"
-              desc="Nigerian-issued Visa and Mastercard."
-              value="2%"
-              indent
+              value="1.5%"
+              subs={[
+                "capped at ₦2,000 — the absolute maximum you'll ever pay per transaction",
+              ]}
+              last
             />
 
             <GroupLabel>Global</GroupLabel>
-            <LineItem
+            <FeeRow
               label="Cards"
-              desc={
-                <>
-                  Visa, Mastercard, and major digital wallets for global
-                  customers.
-                  <br />
-                  No need for ACH withdrawal. Withdraw as USDT directly or swap
-                  to NGN immediately.
-                </>
-              }
-              value="4% + $0.40"
-              sub="+1.5% for non-US cards"
-              indent
+              desc="Visa, Mastercard, and major digital wallets for global customers. No need for ACH withdrawal — withdraw as USDT directly or convert to NGN immediately."
+              value="5% + 50¢"
+              last
             />
-
-            <GroupLabel>Mobile money</GroupLabel>
-            <LineItem
-              label="Supported African markets"
-              desc="M-Pesa, MTN MoMo, Airtel Money, and other African mobile wallets."
-              value="3%"
-              sub="+1% for auto conversion to NGN"
-              indent
-            />
-
-            <GroupLabel>Crypto</GroupLabel>
-            <LineItem
-              label="USDT & supported networks"
-              desc="Accept USDC and USDT on supported EVM-compatible networks."
-              value="1.5%"
-              indent
-            />
-
-            <div
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                color: "#aaaaaa",
-                marginBottom: "0.875rem",
-                marginTop: "2rem",
-              }}
-            >
-              What you're replacing
-            </div>
-            <div className="pricing-why-grid">
-              <div
-                style={{
-                  background: "#f9f9f8",
-                  borderRadius: "0.75rem",
-                  padding: "1.25rem 1.5rem",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    color: "#bbbbbb",
-                    marginBottom: "0.875rem",
-                  }}
-                >
-                  The old way
-                </p>
-                {[
-                  "Multiple tools for different currencies and regions",
-                  "Taking on FX risk every time money changes hands",
-                  "Paying ACH fees just to move USD before converting to NGN",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.875rem",
-                      color: "#888888",
-                      marginBottom: "0.75rem",
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.5rem",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <span style={{ color: "#cccccc", flexShrink: 0 }}>×</span>{" "}
-                    {t}
-                  </div>
-                ))}
-              </div>
-              <div
-                style={{
-                  background: "#111111",
-                  borderRadius: "0.75rem",
-                  padding: "1.25rem 1.5rem",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.3)",
-                    marginBottom: "0.875rem",
-                  }}
-                >
-                  With Bachs
-                </p>
-                {[
-                  "One integration handles every currency and market",
-                  "We absorb the FX risk. You get a clean rate",
-                  "NGN settlement directly. No intermediate hops",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.875rem",
-                      color: "rgba(255,255,255,0.7)",
-                      marginBottom: "0.75rem",
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.5rem",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      style={{ flexShrink: 0, marginTop: "0.2rem" }}
-                    >
-                      <path
-                        d="M3 8l3 3 7-7"
-                        stroke="rgba(255,255,255,0.5)"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {t}
-                  </div>
-                ))}
-              </div>
-            </div>
           </Card>
         </div>
 
-        {/* ── Balances + Payouts + FX ── */}
-        <div style={{ marginBottom: "4rem" }}>
-          <SectionLabel>Balances, Payouts & FX</SectionLabel>
-          <div className="pricing-section-grid">
-            <Card>
-              <h3
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.0625rem",
-                  fontWeight: 600,
-                  color: "#111111",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Balances
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#888888",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Get paid in the currency your customer uses.
-              </p>
-              <LineItem label="NGN payments" value="NGN balance" />
-              <LineItem
-                label="Global payments"
-                desc="Withdrawable as stablecoin or convert to NGN. Instant payout, no ACH delay or deposit fees."
-                value="USD balance"
+        {/* ── Mobile Money ── */}
+        <div style={{ marginBottom: "3rem" }}>
+          <SectionLabel>Mobile Money</SectionLabel>
+          <Card>
+            <CardHeader
+              icon={
+                <IconChip>
+                  <PhoneIcon />
+                </IconChip>
+              }
+              title="Mobile money"
+              desc="Reach customers across Africa's biggest mobile wallets."
+            />
+            <div style={{ marginTop: "0.5rem" }}>
+              <FeeRow
+                label="Ghana & Kenya"
+                desc="M-Pesa, MTN MoMo, Airtel Money and other GHS / KES wallets."
+                value="2%"
+                subs={["+1% for currency conversions"]}
+              />
+              <FeeRow
+                label="Other African markets"
+                desc="XAF, XOF, UGX, ZMW, TZS and RWF mobile wallets."
+                value="3%"
+                subs={["+1% for currency conversions"]}
                 last
               />
-            </Card>
-            <Card>
-              <h3
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.0625rem",
-                  fontWeight: 600,
-                  color: "#111111",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Payouts
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#888888",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Move money how you want.
-              </p>
-              <LineItem label="NGN → Local bank" value="Free" />
-              <LineItem label="USD → USDT" value="$1.00" last />
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.8125rem",
-                  color: "#aaaaaa",
-                  lineHeight: 1.6,
-                  marginTop: "1rem",
-                }}
-              >
-                Fast, reliable, global.
-              </p>
-            </Card>
-          </div>
-          <Card style={{ marginTop: "1.25rem" }}>
-            <h3
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "1.0625rem",
-                fontWeight: 600,
-                color: "#111111",
-                marginBottom: "0.375rem",
-              }}
-            >
-              Currency Conversion
-            </h3>
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.875rem",
-                color: "#888888",
-                marginBottom: "1.25rem",
-              }}
-            >
-              Convert only when you need to.
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-              {["USD → NGN", "Competitive FX rates", "No hidden charges"].map(
-                (f) => (
-                  <div
-                    key={f}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                      padding: "0.5rem 1rem",
-                      background: "#f9f9f8",
-                      borderRadius: "9999px",
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.875rem",
-                      color: "#444444",
-                    }}
-                  >
-                    <Check /> {f}
-                  </div>
-                ),
-              )}
             </div>
           </Card>
         </div>
 
-        {/* ── Refunds, Disputes ── */}
-        <div style={{ marginBottom: "4rem" }}>
-          <SectionLabel>Refunds & Disputes</SectionLabel>
+        {/* ── Crypto ── */}
+        <div style={{ marginBottom: "3rem" }}>
+          <SectionLabel>Crypto</SectionLabel>
           <Card>
-            <h3
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "1.0625rem",
-                fontWeight: 600,
-                color: "#111111",
-                marginBottom: "0.375rem",
-              }}
-            >
-              Clear, predictable fees.
-            </h3>
-            <Divider />
-            <LineItem label="Refunds" value="$1.00" sub="per refund" />
-            <LineItem
-              label="Disputes / Chargebacks"
-              value="$30.00"
-              sub="per dispute"
+            <CardHeader
+              icon={
+                <IconChip>
+                  <CoinIcon />
+                </IconChip>
+              }
+              title="Crypto"
+              desc="Accept stablecoins with instant, borderless settlement."
             />
+            <div style={{ marginTop: "0.5rem" }}>
+              <FeeRow
+                label="USDT & supported networks"
+                desc="Accept USDC and USDT on supported EVM-compatible networks."
+                value="1.5%"
+                last
+              />
+            </div>
           </Card>
         </div>
 
-        {/* ── Billing & Recovery ── */}
-        <div style={{ marginBottom: "4rem" }}>
-          <SectionLabel>Billing & Revenue Tools</SectionLabel>
-          <div className="pricing-section-grid">
-            <Card>
-              <h3
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.0625rem",
-                  fontWeight: 600,
-                  color: "#111111",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Billing
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#888888",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Everything you need to monetize. Only pay if you use it.
-              </p>
-              <LineItem label="Subscriptions & usage billing" value="+0.5%" />
-              <LineItem label="Tax handling" value="+0.5%" />
-              <LineItem label="Invoicing" value="Included" />
-              <LineItem label="Analytics & reporting" value="Included" />
-            </Card>
-            <Card>
-              <h3
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "1.0625rem",
-                  fontWeight: 600,
-                  color: "#111111",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Recovery
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "0.875rem",
-                  color: "#888888",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Recover lost revenue automatically.
-              </p>
-              <LineItem
-                label="Abandoned checkout recovery"
-                value="Free to enable"
-              />
-              <LineItem label="Subscription dunning" value="Free to enable" />
-              <Divider />
-              <div
-                style={{
-                  background: "#f9f9f8",
-                  borderRadius: "0.625rem",
-                  padding: "1rem 1.25rem",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: "1.25rem",
-                    fontWeight: 600,
-                    color: "#111111",
-                    marginBottom: "0.25rem",
-                  }}
-                >
-                  5%
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.8125rem",
-                    color: "#888888",
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
-                  on successfully recovered revenue. You pay nothing if nothing
-                  is recovered.
-                </p>
-              </div>
-            </Card>
+        {/* ── Do the math ── */}
+        <div style={{ margin: "5rem 0" }}>
+          <SectionLabel>Do the math</SectionLabel>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(1.375rem, 3vw, 1.875rem)",
+              fontWeight: 600,
+              color: INK,
+              letterSpacing: "-0.02em",
+              marginBottom: "0.5rem",
+            }}
+          >
+            What you actually keep.
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.9375rem",
+              color: "#888888",
+              marginBottom: "2rem",
+              maxWidth: "34rem",
+              lineHeight: 1.6,
+            }}
+          >
+            Real numbers, no asterisks. Here's what our pricing looks like on
+            actual sales.
+          </p>
+          <div className="pricing-math-grid">
+            <MathCard
+              scenario="Your customer pays ₦100,000 by bank transfer"
+              lines={[
+                ["Fee (1.5%)", "₦1,500"],
+                ["You keep", "₦98,500"],
+              ]}
+              takeaway="Settled to your NGN balance instantly — ready to withdraw, even on a Sunday."
+            />
+            <MathCard
+              scenario="Your customer pays ₦2,000,000 by bank transfer"
+              lines={[
+                ["Fee (capped)", "₦2,000"],
+                ["You keep", "₦1,998,000"],
+              ]}
+              takeaway="That's an effective rate of 0.1%. The bigger the sale, the less you pay."
+            />
+            <MathCard
+              scenario="Your customer pays $100 by card from anywhere"
+              lines={[
+                ["Fee (5% + 50¢)", "$5.50"],
+                ["You keep", "$94.50"],
+              ]}
+              takeaway="Straight to your USD balance — withdraw as USDT or convert to NGN instantly."
+            />
           </div>
         </div>
 
-        {/* ── Fraud & Security ── */}
-        <div style={{ marginBottom: "4rem" }}>
-          <SectionLabel>Fraud & Security</SectionLabel>
-          <Card>
-            <h3
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "1.0625rem",
-                fontWeight: 600,
-                color: "#111111",
-                marginBottom: "0.375rem",
-              }}
-            >
-              Built-in protection.
-            </h3>
-            <Divider />
-            <BulletRow>No % fee on transactions</BulletRow>
-            <BulletRow>Transparent event-based pricing</BulletRow>
-            <BulletRow>No hidden charges</BulletRow>
+        {/* ── Everything included ── */}
+        <div style={{ margin: "5rem 0" }}>
+          <SectionLabel>Included with every rate</SectionLabel>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(1.375rem, 3vw, 1.875rem)",
+              fontWeight: 600,
+              color: INK,
+              letterSpacing: "-0.02em",
+              marginBottom: "2rem",
+            }}
+          >
+            The rate is the whole price.
+          </h2>
+          <Card style={{ padding: "2.5rem" }}>
+            <div className="pricing-included-grid">
+              {INCLUDED.map((item) => (
+                <div key={item.title}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "0.5rem",
+                      marginBottom: "0.375rem",
+                    }}
+                  >
+                    <CheckIcon />
+                    <span
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: "0.9375rem",
+                        fontWeight: 600,
+                        color: INK,
+                      }}
+                    >
+                      {item.title}
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: "0.8125rem",
+                      color: "#888888",
+                      lineHeight: 1.6,
+                      margin: 0,
+                      paddingLeft: "1.45rem",
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </Card>
         </div>
 
-        {/* ── Why Bachs ── */}
-        <div style={{ marginBottom: "5rem" }}>
+        {/* ── Why Bachs / comparison ── */}
+        <div style={{ margin: "5rem 0" }}>
           <SectionLabel>Why Bachs</SectionLabel>
-          <Card style={{ background: "#111111", border: "none" }}>
+          <Card style={{ background: INK, border: "none", padding: "2.5rem" }}>
             <h2
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -979,92 +874,170 @@ export function PricingPage({ navigate }) {
                 You're removing invisible losses.
               </span>
             </h2>
-            <Divider />
-            <div className="pricing-why-grid">
-              <div>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.3)",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  Your current stack
-                </p>
-                {[
-                  "Paystack → NGN",
-                  "Flutterwave → Mobile money",
-                  "Polar → Global cards",
-                  "FX conversions → hidden losses",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.9375rem",
-                      color: "rgba(255,255,255,0.5)",
-                      marginBottom: "0.625rem",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.625rem",
-                    }}
-                  >
-                    <span style={{ color: "rgba(255,255,255,0.2)" }}>–</span>{" "}
-                    {t}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.3)",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  With Bachs
-                </p>
-                {[
-                  "One integration",
-                  "One balance system",
-                  "No unnecessary conversions",
-                  "Full control over how you get paid",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.9375rem",
-                      color: "rgba(255,255,255,0.75)",
-                      marginBottom: "0.625rem",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.625rem",
-                    }}
-                  >
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                      <path
-                        d="M3 8l3 3 7-7"
-                        stroke="rgba(255,255,255,0.5)"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {t}
-                  </div>
-                ))}
-              </div>
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9375rem",
+                color: "rgba(255,255,255,0.5)",
+                lineHeight: 1.65,
+                maxWidth: "38rem",
+                marginBottom: "2rem",
+              }}
+            >
+              The stitched stack — one provider for NGN, another for mobile
+              money, a third for global cards — doesn't just cost more in fees.
+              It bleeds money through FX spreads, transfer hops, and idle
+              settlement delays.
+            </p>
+
+            {/* Header row */}
+            <div
+              className="pricing-compare-row"
+              style={{
+                padding: "0 0 0.75rem",
+                borderBottom: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <span />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.6)",
+                }}
+              >
+                With Bachs
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.3)",
+                }}
+              >
+                The stitched stack
+              </span>
             </div>
+            {COMPARISON.map((row, i) => (
+              <div
+                key={row.label}
+                className="pricing-compare-row"
+                style={{
+                  padding: "1.125rem 0",
+                  borderBottom:
+                    i === COMPARISON.length - 1
+                      ? "none"
+                      : "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "0.9375rem",
+                    fontWeight: 500,
+                    color: "rgba(255,255,255,0.85)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {row.label}
+                </span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "0.5rem",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "0.875rem",
+                    color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    style={{ flexShrink: 0, marginTop: "0.25rem" }}
+                  >
+                    <path
+                      d="M3 8l3 3 7-7"
+                      stroke="rgba(255,255,255,0.6)"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {row.bachs}
+                </span>
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "0.5rem",
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "0.875rem",
+                    color: "rgba(255,255,255,0.35)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <span style={{ flexShrink: 0 }}>×</span>
+                  {row.stack}
+                </span>
+              </div>
+            ))}
           </Card>
+        </div>
+
+        {/* ── FAQ ── */}
+        <div style={{ margin: "5rem 0" }}>
+          <SectionLabel>Common questions</SectionLabel>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(1.375rem, 3vw, 1.875rem)",
+              fontWeight: 600,
+              color: INK,
+              letterSpacing: "-0.02em",
+              marginBottom: "1rem",
+            }}
+          >
+            No stupid questions. Ask away.
+          </h2>
+          <div>
+            {FAQS.map((f, i) => (
+              <FAQItem
+                key={f.q}
+                q={f.q}
+                a={f.a}
+                open={openFaq === i}
+                onToggle={() => setOpenFaq(openFaq === i ? -1 : i)}
+              />
+            ))}
+          </div>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.875rem",
+              color: "#888888",
+              marginTop: "1.5rem",
+            }}
+          >
+            Processing serious volume?{" "}
+            <a
+              href="https://cal.com/bolu-dada/bachs"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: INK, fontWeight: 500 }}
+            >
+              Talk to us about custom rates →
+            </a>
+          </p>
         </div>
 
         {/* ── Final CTA ── */}
@@ -1074,23 +1047,13 @@ export function PricingPage({ navigate }) {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
               fontWeight: 600,
-              color: "#111111",
+              color: INK,
               letterSpacing: "-0.025em",
               marginBottom: "0.75rem",
             }}
           >
             Stop stitching payment providers together.
           </h2>
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "1rem",
-              color: "#888888",
-              marginBottom: "0.375rem",
-            }}
-          >
-            Start at 1.2%
-          </p>
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
@@ -1108,7 +1071,7 @@ export function PricingPage({ navigate }) {
               alignItems: "center",
               gap: "0.5rem",
               padding: "0.875rem 2rem",
-              background: "#111111",
+              background: INK,
               color: "#ffffff",
               fontFamily: "'Inter', sans-serif",
               fontSize: "1rem",
@@ -1116,8 +1079,8 @@ export function PricingPage({ navigate }) {
               borderRadius: "9999px",
               textDecoration: "none",
             }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "#333333")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "#111111")}
+            onMouseOver={(e) => (e.currentTarget.style.background = INK_HOVER)}
+            onMouseOut={(e) => (e.currentTarget.style.background = INK)}
           >
             Get started
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">

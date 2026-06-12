@@ -1,13 +1,15 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Navigation } from '../components/islands/Navigation.jsx';
 import { PricingPage } from '../components/islands/PricingPage.jsx';
 ---
 
 <BaseLayout
   title="Pricing — Bachs"
-  description="Simple, transparent pricing. Start at 1.2% per successful local transaction. No setup fees, no monthly costs."
+  description="Simple, transparent pricing. 1.5% per successful local transaction, capped at ₦2,000. No setup fees, no monthly costs."
   canonical="https://bachs.io/pricing"
 >
+  <Navigation client:load />
   <PricingPage client:load />
 </BaseLayout>
